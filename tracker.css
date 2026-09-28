@@ -1,0 +1,592 @@
+/* Home Ploit - Loan Application Tracker & Property Visit Styles */
+
+/* 0. Vertical Stepper Timeline (Screen 11) */
+.vertical-stepper-wrapper {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 20px 16px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.vertical-step-item {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  padding-bottom: 24px;
+}
+
+.vertical-step-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Connecting vertical line */
+.vertical-step-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 32px;
+  bottom: 0;
+  width: 2px;
+  background: #cbd5e1;
+}
+
+.vertical-step-item.completed:not(:last-child)::before {
+  background: #059669;
+}
+
+.vertical-step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  background: #ffffff;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  transition: all 0.2s ease;
+}
+
+.vertical-step-item.completed .vertical-step-icon {
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff;
+}
+
+.vertical-step-item.in-progress .vertical-step-icon {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+  animation: pulseNode 2s infinite;
+}
+
+.vertical-step-item.pending .vertical-step-icon {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+}
+
+.vertical-step-content {
+  flex: 1;
+  padding-top: 2px;
+}
+
+.vertical-step-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.vertical-step-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.vertical-step-status-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 9999px;
+}
+
+.vertical-step-desc {
+  font-size: 12px;
+  color: #64748b;
+  margin: 2px 0 0 0;
+  line-height: 1.4;
+}
+
+/* 1. 10-Stage Horizontal Scrollable / Compact Stepper Bar */
+.tracker-stepper-container {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 14px 12px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.stepper-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.stepper-progress-text {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stepper-scroll-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 2px 10px 2px;
+  scrollbar-width: thin;
+}
+
+.step-node-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  min-width: 60px;
+  position: relative;
+  transition: transform var(--transition-fast);
+}
+
+.step-node-btn:hover {
+  transform: translateY(-2px);
+}
+
+.node-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  border: 2px solid #cbd5e1;
+  background: #ffffff;
+  color: #64748b;
+  position: relative;
+  z-index: 2;
+  transition: all var(--transition-fast);
+}
+
+.step-node-btn.completed .node-circle {
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff;
+}
+
+.step-node-btn.active .node-circle {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+  animation: pulseNode 2s infinite;
+}
+
+@keyframes pulseNode {
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+.step-node-btn.pending .node-circle {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+}
+
+.node-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-align: center;
+  line-height: 1.2;
+  max-width: 58px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.step-node-btn.active .node-label {
+  color: #2563eb;
+  font-weight: 800;
+}
+
+/* 2. Primary 4-Question Hero Card */
+.tracker-stage-detail-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  padding: 18px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.stage-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.stage-number-pill {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-secondary-light);
+  color: var(--color-secondary);
+}
+
+.stage-status-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.stage-status-pill.completed {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.stage-status-pill.active {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.stage-status-pill.pending {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.stage-card-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin-bottom: 14px;
+}
+
+/* Four Pillars Sections */
+.pillar-section {
+  padding: 12px;
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  border: 1px solid var(--color-border);
+}
+
+.pillar-happening {
+  background: #f8fafc;
+  border-left: 4px solid #0284c7;
+}
+
+.pillar-responsible {
+  background: #ffffff;
+  border-left: 4px solid #8b5cf6;
+}
+
+.pillar-sla {
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+}
+
+.pillar-action {
+  background: #ecfdf5;
+  border-left: 4px solid #10b981;
+}
+
+.pillar-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.pillar-happening .pillar-label { color: #0369a1; }
+.pillar-responsible .pillar-label { color: #6d28d9; }
+.pillar-sla .pillar-label { color: #b45309; }
+.pillar-action .pillar-label { color: #047857; }
+
+.pillar-content-text {
+  font-size: 13px;
+  color: var(--color-text-primary);
+  line-height: 1.45;
+}
+
+/* Responsible Person Contact Card */
+.officer-contact-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.officer-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6d28d9, #4f46e5);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.officer-info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.officer-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.officer-role {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.officer-company {
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+}
+
+.officer-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-contact-action {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: #ffffff;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-contact-action:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+
+/* 3. Property Visit Verification Card (Feature 7) */
+.visit-verification-card {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 1.5px solid #93c5fd;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.visit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  margin-bottom: 8px;
+}
+
+.visit-heading {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e3a8a;
+  margin-bottom: 4px;
+}
+
+.visit-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: #1e40af;
+  margin-bottom: 12px;
+}
+
+.visit-question-box {
+  background: #ffffff;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-top: 10px;
+}
+
+.visit-question-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.visit-action-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.btn-visit-choice {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  text-align: center;
+  transition: var(--transition-fast);
+}
+
+.btn-visit-choice.yes {
+  background: #059669;
+  color: #ffffff;
+  border-color: #059669;
+}
+
+.btn-visit-choice.reschedule {
+  background: #f1f5f9;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+.btn-visit-choice.no {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fca5a5;
+}
+
+.btn-visit-choice:hover {
+  transform: translateY(-1px);
+}
+
+/* 4. No-Blame Escalation Drawer & Form */
+.escalation-container {
+  padding: 4px 0;
+}
+
+.escalation-neutral-notice {
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: #1e3a8a;
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+
+.escalation-reasons-group {
+  margin-bottom: 14px;
+}
+
+.escalation-reason-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.escalation-reason-option:hover, .escalation-reason-option.selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.escalation-ticket-card {
+  background: #ecfdf5;
+  border: 1.5px solid #34d399;
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.ticket-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ticket-id-tag {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 800;
+  background: #ffffff;
+  border: 1px solid #a7f3d0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #065f46;
+}
+
+.ticket-sla-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #059669;
+}
+
+/* 5. Loan Delay Alert System (Feature 8) */
+.delay-alert-banner {
+  background: linear-gradient(135deg, #fff1f2 0%, #fee2e2 100%);
+  border: 1.5px solid #fecdd3;
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.delay-alert-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #9f1239;
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.delay-alert-text {
+  font-size: 12px;
+  color: #881337;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.delay-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
